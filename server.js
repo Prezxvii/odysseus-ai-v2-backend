@@ -6,7 +6,13 @@ require('dotenv').config();
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+
+// Configure CORS to allow requests from your deployed Vercel frontend
+app.use(cors({
+  origin: 'https://odysseus-ai-v2.vercel.app', // <-- Your Vercel frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 
